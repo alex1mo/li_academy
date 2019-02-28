@@ -5,15 +5,21 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
-import "./index.css";
+import User from "./User";
 
 export default class Users extends Component {
   state = {
     users: [],
-    styleRow: true
+    open: false
+  };
+
+  openDetails = elem => e => {
+    if (e.currentTarget.hasAttribute("open")) {
+      elem = false;
+    }
+    this.setState({
+      open: elem
+    });
   };
 
   componentDidMount() {
@@ -41,13 +47,12 @@ export default class Users extends Component {
     let styleHeaderRow = {
       fontSize: "15px",
       fontWeight: "bolder",
-      color: "#000000a6",
-      padding: "0"
+      color: "#000000a6"
     };
 
     return (
       <Paper className="Users" style={styleUsers}>
-        <Table>
+        <Table padding="none">
           <TableHead>
             <TableRow>
               <TableCell />
@@ -60,46 +65,17 @@ export default class Users extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user, e) => (
-              <TableRow
-                key={user.login.username}
-                className={e % 2 === 0 ? "styleRow" : null}
-              >
-                <TableCell padding="none">
-                  <Grid container justify="center" alignItems="center">
-                    <Avatar
-                      alt="avatar is missing"
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        border: "4px solid white"
-                      }}
-                      src={user.picture.large}
-                    />
-                  </Grid>
-                </TableCell>
-                <TableCell padding="none">
-                  {user.name.last[0].toUpperCase() + user.name.last.substr(1)}
-                </TableCell>
-                <TableCell padding="none">
-                  {user.name.first[0].toUpperCase() + user.name.first.substr(1)}
-                </TableCell>
-                <TableCell padding="none">{user.login.username}</TableCell>
-                <TableCell padding="none">{user.phone}</TableCell>
-                <TableCell padding="none">{user.location.state}</TableCell>
-                <TableCell padding="none">
-                  <Icon
-                    style={{
-                      fontSize: "55px",
-                      fontWeight: "bolder",
-                      color: "#00000080"
-                    }}
-                  >
-                    +
-                  </Icon>
-                </TableCell>
-              </TableRow>
-            ))}
+            {users.map((user, e) => {
+              return (
+                <User
+                  key={user.login.username}
+                  user={user}
+                  e={e}
+                  open={this.state.open === e}
+                  openDetails={this.openDetails}
+                />
+              );
+            })}
           </TableBody>
         </Table>
       </Paper>
