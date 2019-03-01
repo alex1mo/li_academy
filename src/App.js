@@ -5,22 +5,36 @@ import Users from "./Components/Users";
 
 class App extends Component {
   state = {
-    search: ""
+    search: "",
+    users: []
   };
 
-  filterUsers = () => e => {
+  filterUsers = users => e => {
     this.setState({
       search: e.target.value.toLowerCase()
     });
   };
 
+  componentDidMount() {
+    fetch("https://randomuser.me/api/?results=100", { method: "GET" })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result =>
+          this.setState({
+            users: result.results
+          }),
+        error => console.log(error)
+      );
+  }
+
   render() {
-    let { search } = this.state;
-    console.log(this.state.search);
+    let { search, users } = this.state;
     return (
       <div className="App">
-        <Header filterUsers={this.filterUsers} />
-        <Users search={search} />
+        <Header filterUsers={this.filterUsers} users={users} />
+        <Users search={search} users={users} />
       </div>
     );
   }

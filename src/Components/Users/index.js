@@ -9,7 +9,6 @@ import User from "./User";
 
 export default class Users extends Component {
   state = {
-    users: [],
     open: false
   };
 
@@ -22,22 +21,8 @@ export default class Users extends Component {
     });
   };
 
-  componentDidMount() {
-    fetch("https://randomuser.me/api/?results=100", { method: "GET" })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result =>
-          this.setState({
-            users: result.results
-          }),
-        error => console.log(error)
-      );
-  }
   render() {
-    let { users } = this.state;
-    let { search } = this.props;
+    let { search, users } = this.props;
 
     let styleUsers = {
       background: "transparent",
@@ -74,7 +59,7 @@ export default class Users extends Component {
               .map((user, e) => {
                 return (
                   <User
-                    key={user.login.username}
+                    key={user.login.username + `${e}`}
                     user={user}
                     e={e}
                     open={this.state.open === e}

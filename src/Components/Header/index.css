@@ -1,5 +1,7 @@
 header {
   height: 80px;
-  /* border: 1px solid black; */
   margin: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
