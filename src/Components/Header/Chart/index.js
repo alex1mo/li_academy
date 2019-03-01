@@ -4,7 +4,7 @@ import "./index.css";
 
 export default class Chart extends Component {
   render() {
-    let { users } = this.props;
+    let { users, chartOpen, chart } = this.props;
     let data = [
       {
         id: `Male:${chartGender(users).male}%`,
@@ -36,6 +36,9 @@ export default class Chart extends Component {
     return (
       <div className="chart">
         <span style={{ paddingTop: "20px", color: "white" }}>Gender users</span>
+        <span onClick={chartOpen(chart)} className="closeChart">
+          +
+        </span>
         <ResponsivePie
           data={data}
           colorBy={e => e.color}

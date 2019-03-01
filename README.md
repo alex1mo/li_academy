@@ -1,5 +1,9 @@
 LIGHT ACADEMY. FRONT END‘19
 
+## Getting Started with npm
+
+npm i
+
 ## Available Scripts
 
 In the project directory, you can run:

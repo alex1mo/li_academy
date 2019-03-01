@@ -1,0 +1,34 @@
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.chart,
+.chart .closeChart {
+  z-index: 1;
+}
+
+.chart text,
+.chart .closeChart {
+  color: white;
+}
+
+.chart text {
+  font-size: 20px !important;
+}
+
+.chart .closeChart {
+  transform: rotate(45deg);
+  position: absolute;
+  top: 20px;
+  right: 15%;
+  font-size: 50px;
+  cursor: pointer;
+}

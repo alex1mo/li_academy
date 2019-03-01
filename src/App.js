@@ -9,7 +9,7 @@ class App extends Component {
     users: []
   };
 
-  filterUsers = users => e => {
+  filterUsers = () => e => {
     this.setState({
       search: e.target.value.toLowerCase()
     });

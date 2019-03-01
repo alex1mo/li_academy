@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./index.css";
 import Search from "./Search";
 import ButtonStat from "./ButtonImg";
-import Chart from "./Statistic";
+import Chart from "./Chart";
 
 export default class Header extends Component {
   state = {
@@ -23,7 +23,9 @@ export default class Header extends Component {
       <header>
         <Search filterUsers={filterUsers} />
         <ButtonStat chartOpen={this.chartOpen} chart={chart} />
-        {chart && <Chart users={users} />}
+        {chart && (
+          <Chart chartOpen={this.chartOpen} chart={chart} users={users} />
+        )}
       </header>
     );
   }
