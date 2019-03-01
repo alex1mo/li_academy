@@ -37,6 +37,7 @@ export default class Users extends Component {
   }
   render() {
     let { users } = this.state;
+    let { search } = this.props;
 
     let styleUsers = {
       background: "transparent",
@@ -65,17 +66,22 @@ export default class Users extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user, e) => {
-              return (
-                <User
-                  key={user.login.username}
-                  user={user}
-                  e={e}
-                  open={this.state.open === e}
-                  openDetails={this.openDetails}
-                />
-              );
-            })}
+            {users
+              .filter((user, e) => {
+                let name = user.name.first;
+                return name.substr(0, search.length) === search;
+              })
+              .map((user, e) => {
+                return (
+                  <User
+                    key={user.login.username}
+                    user={user}
+                    e={e}
+                    open={this.state.open === e}
+                    openDetails={this.openDetails}
+                  />
+                );
+              })}
           </TableBody>
         </Table>
       </Paper>
