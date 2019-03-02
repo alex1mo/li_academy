@@ -25,15 +25,11 @@ class App extends Component {
       .then(
         result =>
           this.setState({
-            users: result.results
+            users: result.results,
+            loader: !this.state.loader
           }),
         error => console.log(error)
-      )
-      .then(() => {
-        this.setState({
-          loader: !this.state.loader
-        });
-      });
+      );
   }
 
   render() {
