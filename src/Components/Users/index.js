@@ -22,12 +22,13 @@ export default class Users extends Component {
   };
 
   render() {
-    let { search, users } = this.props;
+    let { search, users, error, loader } = this.props;
 
     let styleUsers = {
       background: "transparent",
       margin: "0 20px",
-      boxShadow: "none"
+      boxShadow: "none",
+      minHeight: !error && !loader && "calc(100vh - 80px)"
     };
 
     let styleHeaderRow = {

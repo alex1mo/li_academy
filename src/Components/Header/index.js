@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 import Search from "./Search";
-import ButtonStat from "./ButtonImg";
+import ButtonStat from "./ButtonStat";
 import Chart from "./Chart";
 
 export default class Header extends Component {
@@ -16,13 +16,13 @@ export default class Header extends Component {
   };
 
   render() {
-    let { filterUsers, users } = this.props;
+    let { filterUsers, users, error } = this.props;
     let { chart } = this.state;
 
     return (
       <header>
         <Search filterUsers={filterUsers} />
-        <ButtonStat chartOpen={this.chartOpen} chart={chart} />
+        <ButtonStat chartOpen={this.chartOpen} chart={chart} error={error} />
         {chart && (
           <Chart chartOpen={this.chartOpen} chart={chart} users={users} />
         )}

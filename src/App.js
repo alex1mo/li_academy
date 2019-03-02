@@ -3,12 +3,14 @@ import "./App.css";
 import Header from "./Components/Header";
 import Users from "./Components/Users";
 import Progress from "./Components/Progress";
+import ConectError from "./Components/ConectError";
 
 class App extends Component {
   state = {
     search: "",
     users: [],
-    loader: true
+    loader: true,
+    error: false
   };
 
   filterUsers = () => e => {
@@ -18,7 +20,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("https://randomuser.me/api/?results=100", { method: "GET" })
+    fetch("https://randomuser.me/api/?results=1000", { method: "GET" })
       .then(res => {
         return res.json();
       })
@@ -28,17 +30,24 @@ class App extends Component {
             users: result.results,
             loader: !this.state.loader
           }),
-        error => console.log(error)
+        error => {
+          this.setState({
+            loader: !this.state.loader,
+            error: !this.state.error
+          });
+          console.log(error);
+        }
       );
   }
 
   render() {
-    let { search, users, loader } = this.state;
+    let { search, users, loader, error } = this.state;
     return (
       <div className="App">
-        <Header filterUsers={this.filterUsers} users={users} />
-        <Users search={search} users={users} />
+        <Header filterUsers={this.filterUsers} users={users} error={error} />
+        <Users search={search} users={users} loader={loader} error={error} />
         {loader && <Progress />}
+        {error && <ConectError />}
       </div>
     );
   }
