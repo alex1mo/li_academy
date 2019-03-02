@@ -20,7 +20,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("https://randomuser.me/api/?results=1000", { method: "GET" })
+    fetch("https://randomuser.me/api/?results=100", { method: "GET" })
       .then(res => {
         return res.json();
       })
