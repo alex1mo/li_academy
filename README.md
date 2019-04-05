@@ -1,5 +1,4 @@
 LIGHT ACADEMY. FRONT END‘19
-https://li-academy-frontend-test.herokuapp.com/
 
 ## Getting Started with npm
 
